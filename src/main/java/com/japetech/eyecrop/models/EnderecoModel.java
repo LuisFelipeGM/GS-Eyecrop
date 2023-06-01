@@ -1,5 +1,6 @@
 package com.japetech.eyecrop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -37,7 +38,8 @@ public class EnderecoModel implements Serializable {
 
     @OrderColumn(name = "6")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_USUARIO_ENDERECO"))
+    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_ENDERECO_USUARIO"))
+    @JsonIgnore
     private UsuarioModel usuario;
 
 

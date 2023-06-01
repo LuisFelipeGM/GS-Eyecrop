@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class UsuarioService extends GenericService<UsuarioModel, Long>{
 
-        private UsuarioRepository usuarioRepository;
+        private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(JpaRepository<UsuarioModel, Long> repository, UsuarioRepository usuarioRepository) {
         super(repository);
