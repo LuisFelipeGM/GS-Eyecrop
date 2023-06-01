@@ -1,5 +1,6 @@
 package com.japetech.eyecrop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
@@ -27,8 +28,11 @@ public class UsuarioModel implements Serializable {
     @OrderColumn(name = "3")
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 30)
     @OrderColumn(name = "4")
     private String senha;
+
+    @OneToOne(mappedBy = "usuario")
+    private EnderecoModel endereco;
 
 }
