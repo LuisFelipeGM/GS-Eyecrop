@@ -23,12 +23,15 @@ public class UsuarioModel implements Serializable {
     private String nome;
 
     @Email
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 30)
     @OrderColumn(name = "3")
     private String email;
 
     @Column(nullable = false, length = 100)
     @OrderColumn(name = "4")
     private String senha;
+
+    @OneToOne(mappedBy = "usuario")
+    private EnderecoModel endereco;
 
 }
