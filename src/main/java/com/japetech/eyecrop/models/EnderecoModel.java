@@ -23,8 +23,7 @@ public class EnderecoModel implements Serializable {
     @OrderColumn(name = "2")
     private String logradouro;
 
-    @Column(nullable = false)
-    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 50)
     @OrderColumn(name = "3")
     private Integer numero;
 
