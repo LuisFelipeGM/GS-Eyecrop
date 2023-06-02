@@ -119,12 +119,7 @@ public class UsuarioController {
     @PostMapping("/")
     public ResponseEntity<Object> save(@Valid @RequestBody UsuarioDto usuarioDto) {
         try {
-            UsuarioModel model = new UsuarioModel();
-            model.setNome(usuarioDto.getNome());
-            model.setEmail(usuarioDto.getEmail());
-            model.setSenha(usuarioDto.getSenha());
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(model));
+            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.adicionarUsuario(usuarioDto));
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao salvar o usuário: " + e.getMessage());
         } catch (Exception e) {
@@ -176,12 +171,7 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @Valid @RequestBody UsuarioDto usuarioDto){
         try {
-            UsuarioModel usu = usuarioService.findById(id);
-            usu.setNome(usuarioDto.getNome());
-            usu.setEmail(usuarioDto.getEmail());
-            usu.setSenha(usuarioDto.getSenha());
-
-            UsuarioModel updateUsuario = usuarioService.save(usu);
+            UsuarioModel updateUsuario = usuarioService.putUsuario(usuarioDto, id);
             return ResponseEntity.ok(updateUsuario);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
@@ -212,21 +202,10 @@ public class UsuarioController {
                     )})
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @Valid @RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @RequestBody UsuarioDto usuarioDto){
         try {
-            UsuarioModel usu = usuarioService.findById(id);
-            if(usuarioDto.getNome() != null){
-                usu.setNome(usuarioDto.getNome());
-            }
-            if (usuarioDto.getEmail() != null) {
-                usu.setEmail(usuarioDto.getEmail());
-            }
-            if (usuarioDto.getSenha() != null) {
-                usu.setSenha(usuarioDto.getSenha());
-            }
-
-            UsuarioModel updatedUsuario = usuarioService.save(usu);
-            return ResponseEntity.ok(updatedUsuario);
+            UsuarioModel updateUsuario = usuarioService.patchUsuario(usuarioDto, id);
+            return ResponseEntity.ok(updateUsuario);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
