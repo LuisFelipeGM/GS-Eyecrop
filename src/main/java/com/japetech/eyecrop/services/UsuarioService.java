@@ -1,11 +1,15 @@
 package com.japetech.eyecrop.services;
 
+import com.japetech.eyecrop.dtos.UsuarioDto;
 import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.repositories.UsuarioRepository;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UsuarioService extends GenericService<UsuarioModel, Long>{
@@ -20,5 +24,73 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
     public List<UsuarioModel> findByemail(String email){
         return ((UsuarioRepository) repository).findByemail(email);
     }
+
+
+    public UsuarioModel adicionarUsuario(UsuarioDto usuarioDto){
+        try {
+            UsuarioModel model = new UsuarioModel();
+            model.setNome(usuarioDto.getNome());
+            model.setEmail(usuarioDto.getEmail());
+            model.setSenha(usuarioDto.getSenha());
+
+            return repository.save(model);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Erro ao salvar o usuário", e);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Erro ao salvar o usuário", e);
+        }
+
+    }
+
+    public UsuarioModel putUsuario(UsuarioDto usuarioDto, Long id){
+        try {
+            Optional<UsuarioModel> usuarioOptional  = usuarioRepository.findById(id);
+            if(usuarioOptional.isPresent()){
+                UsuarioModel usu = usuarioOptional.get();
+                usu.setNome(usuarioDto.getNome());
+                usu.setEmail(usuarioDto.getEmail());
+                usu.setSenha(usuarioDto.getSenha());
+
+                UsuarioModel updateUsuario = repository.save(usu);
+                return updateUsuario;
+            }else{
+                throw new NoSuchElementException("Usuário não encontrado");
+            }
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Usuário não encontrado", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao salvar o usuario", e);
+        }
+
+    }
+
+
+    public UsuarioModel patchUsuario(UsuarioDto usuarioDto, Long id){
+        try {
+            Optional<UsuarioModel> usuarioOptional  = usuarioRepository.findById(id);
+            if (usuarioOptional.isPresent()){
+                UsuarioModel usu = usuarioOptional.get();
+                if(usuarioDto.getNome() != null){
+                    usu.setNome(usuarioDto.getNome());
+                }
+                if (usuarioDto.getEmail() != null) {
+                    usu.setEmail(usuarioDto.getEmail());
+                }
+                if (usuarioDto.getSenha() != null) {
+                    usu.setSenha(usuarioDto.getSenha());
+                }
+                UsuarioModel updatedUsuario = repository.save(usu);
+                return updatedUsuario;
+            }else{
+                throw new NoSuchElementException("Usuário não encontrado");
+            }
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Usuário não encontrado", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao salvar o usuario", e);
+        }
+    }
+
+
 
 }
