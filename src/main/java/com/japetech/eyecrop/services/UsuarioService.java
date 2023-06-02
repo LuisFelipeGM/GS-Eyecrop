@@ -35,9 +35,9 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
 
             return repository.save(model);
         } catch (DataAccessException e) {
-            throw new RuntimeException("Erro ao salvar o usuário", e);
+            throw new RuntimeException(e.getRootCause().getMessage());
         } catch (RuntimeException e) {
-            throw new RuntimeException("Erro ao salvar o usuário", e);
+            throw new RuntimeException(e.getMessage());
         }
 
     }
@@ -56,10 +56,10 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
             }else{
                 throw new NoSuchElementException("Usuário não encontrado");
             }
-        } catch (NoSuchElementException e) {
-            throw new RuntimeException("Usuário não encontrado", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getRootCause().getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar o usuario", e);
+            throw new RuntimeException(e.getMessage());
         }
 
     }
@@ -84,10 +84,10 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
             }else{
                 throw new NoSuchElementException("Usuário não encontrado");
             }
-        } catch (NoSuchElementException e) {
-            throw new RuntimeException("Usuário não encontrado", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar o usuario", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getRootCause().getMessage());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
