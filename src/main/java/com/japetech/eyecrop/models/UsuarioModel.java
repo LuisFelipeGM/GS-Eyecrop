@@ -16,20 +16,16 @@ public class UsuarioModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @OrderColumn(name = "1")
     private Long id;
 
     @Column(nullable = false, length = 80)
-    @OrderColumn(name = "2")
     private String nome;
 
     @Email
-    @Column(nullable = false, length = 100)
-    @OrderColumn(name = "3")
+    @Column(nullable = false, length = 100, unique = true)
     private String email;
 
     @Column(nullable = false, length = 30)
-    @OrderColumn(name = "4")
     private String senha;
 
     @OneToOne(mappedBy = "usuario")

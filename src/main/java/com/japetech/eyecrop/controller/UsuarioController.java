@@ -1,6 +1,7 @@
 package com.japetech.eyecrop.controller;
 
 import com.japetech.eyecrop.dtos.UsuarioDto;
+import com.japetech.eyecrop.exceptions.ErrorResponse;
 import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -121,11 +122,14 @@ public class UsuarioController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.adicionarUsuario(usuarioDto));
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao salvar o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o usuário: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao salvar o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
 
     @Operation(summary = "Exclui um usuario pelo ID", description = "Exclui um usuario a partir do seu ID")
     @ApiResponses(value = {
@@ -176,9 +180,11 @@ public class UsuarioController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao atualizar o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar o usuário: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar o usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -209,9 +215,11 @@ public class UsuarioController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao atualizar parcialmente o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente o usuário: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar parcialmente o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente o usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
