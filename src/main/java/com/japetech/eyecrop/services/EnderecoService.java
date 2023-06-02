@@ -5,6 +5,7 @@ import com.japetech.eyecrop.models.EnderecoModel;
 import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.repositories.EnderecoRepository;
 import com.japetech.eyecrop.repositories.UsuarioRepository;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -49,14 +50,64 @@ public class EnderecoService extends GenericService<EnderecoModel, Long>{
             } else {
                 throw new NoSuchElementException("Usuário não encontrado");
             }
-        } catch (NoSuchElementException e) {
-            throw new RuntimeException("Erro ao salvar o endereço", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getRootCause().getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar o endereço", e);
+            throw new RuntimeException(e.getMessage());
         }
 
-
-
     }
+
+    public EnderecoModel putEndereco(EnderecoDto enderecoDto, Long id){
+        try {
+            Optional<EnderecoModel> enderecoOptional = enderecoRepository.findById(id);
+            if (enderecoOptional.isPresent()){
+                EnderecoModel end = enderecoOptional.get();
+                end.setLogradouro(enderecoDto.getLogradouro());
+                end.setNumero(enderecoDto.getNumero());
+                end.setCidade(enderecoDto.getCidade());
+                end.setEstado(enderecoDto.getEstado());
+
+                EnderecoModel updateEndereco = repository.save(end);
+                return updateEndereco;
+            }else{
+                throw new NoSuchElementException("Endereço não encontrado");
+            }
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getRootCause().getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public EnderecoModel patchEndereco(EnderecoDto enderecoDto, Long id){
+        try {
+            Optional<EnderecoModel> enderecoOptional = enderecoRepository.findById(id);
+            if (enderecoOptional.isPresent()){
+                EnderecoModel end = enderecoOptional.get();
+                if (enderecoDto.getLogradouro() != null){
+                    end.setLogradouro(enderecoDto.getLogradouro());
+                }
+                if (enderecoDto.getNumero() != null){
+                    end.setNumero(enderecoDto.getNumero());
+                }
+                if (enderecoDto.getCidade() != null){
+                    end.setCidade(enderecoDto.getCidade());
+                }
+                if (enderecoDto.getEstado() != null){
+                    end.setEstado(enderecoDto.getEstado());
+                }
+                EnderecoModel updateEndereco = repository.save(end);
+                return updateEndereco;
+            }else{
+                throw new NoSuchElementException("Endereço não encontrado");
+            }
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getRootCause().getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 
 }

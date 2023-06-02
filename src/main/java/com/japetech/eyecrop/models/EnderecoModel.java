@@ -16,26 +16,21 @@ public class EnderecoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @OrderColumn(name = "1")
     private Long id;
 
     @Column(nullable = false, length = 80)
-    @OrderColumn(name = "2")
     private String logradouro;
 
     @Column(nullable = false, length = 50)
-    @OrderColumn(name = "3")
     private Integer numero;
 
     @Column(nullable = false, length = 80)
-    @OrderColumn(name = "4")
     private String cidade;
 
     @Column(nullable = false, length = 80)
-    @OrderColumn(name = "5")
     private String estado;
 
-    @OrderColumn(name = "6")
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_ENDERECO_USUARIO"))
     @JsonIgnore
