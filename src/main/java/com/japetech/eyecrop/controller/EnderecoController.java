@@ -1,6 +1,7 @@
 package com.japetech.eyecrop.controller;
 
 import com.japetech.eyecrop.dtos.EnderecoDto;
+import com.japetech.eyecrop.exceptions.ErrorResponse;
 import com.japetech.eyecrop.models.EnderecoModel;
 import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.services.EnderecoService;
@@ -144,9 +145,11 @@ public class EnderecoController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(enderecoService.adicionarEndereco(enderecoDto));
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao salvar o endereco: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao salvar o endereco: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -195,20 +198,16 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @Valid @RequestBody EnderecoDto enderecoDto){
         try {
-            EnderecoModel end = enderecoService.findById(id);
-            end.setLogradouro(enderecoDto.getLogradouro());
-            end.setNumero(enderecoDto.getNumero());
-            end.setCidade(enderecoDto.getCidade());
-            end.setEstado(enderecoDto.getEstado());
-
-            EnderecoModel updateEndereco = enderecoService.save(end);
+            EnderecoModel updateEndereco = enderecoService.putEndereco(enderecoDto, id);
             return ResponseEntity.ok(updateEndereco);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao atualizar o endereço: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o endereço: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -231,30 +230,18 @@ public class EnderecoController {
                     )})
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @Valid @RequestBody EnderecoDto enderecoDto){
+    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @RequestBody EnderecoDto enderecoDto){
         try {
-            EnderecoModel end = enderecoService.findById(id);
-            if (enderecoDto.getLogradouro() != null){
-                end.setLogradouro(enderecoDto.getLogradouro());
-            }
-            if (enderecoDto.getNumero() != null){
-                end.setNumero(enderecoDto.getNumero());
-            }
-            if (enderecoDto.getCidade() != null){
-                end.setCidade(enderecoDto.getCidade());
-            }
-            if (enderecoDto.getEstado() != null){
-                end.setEstado(enderecoDto.getEstado());
-            }
-
-            EnderecoModel updateEndereco = enderecoService.save(end);
+            EnderecoModel updateEndereco = enderecoService.patchEndereco(enderecoDto, id);
             return ResponseEntity.ok(updateEndereco);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao atualizar parcialmente o endereço: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar parcialmente o endereço: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar o endereço: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
