@@ -45,26 +45,6 @@ public class FotoService extends GenericService<FotoModel, Long> {
         }
     }
 
-    public FotoModel putFoto(FotoDto fotoDto, Long id){
-        try {
-            Optional<FotoModel> fotoOptional = fotoRepository.findById(id);
-            if(fotoOptional.isPresent()){
-                FotoModel foto = fotoOptional.get();
-                foto.setFoto(fotoDto.getFoto());
-
-                FotoModel updateFoto = repository.save(foto);
-                return updateFoto;
-            } else {
-                throw new NoSuchElementException("Foto não encontrada");
-            }
-        } catch (DataAccessException e) {
-            throw new RuntimeException(e.getRootCause().getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-
-    }
-
     public FotoModel patchFoto(FotoDto fotoDto, Long id){
         try {
             Optional<FotoModel> fotoOptional = fotoRepository.findById(id);

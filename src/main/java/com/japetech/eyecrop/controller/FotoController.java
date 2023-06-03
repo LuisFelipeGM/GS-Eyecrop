@@ -130,42 +130,6 @@ public class FotoController {
         }
     }
 
-
-    @Operation(summary = "Atualiza uma foto", description = "Atualiza uma foto existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Foto atualizada com sucesso",
-                    content = {@Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = FotoModel.class)
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Foto não encontrada",
-                    content = {@Content(
-                            mediaType = "application/json",
-                            schema = @Schema(example = "No content")
-                    )}),
-            @ApiResponse(responseCode = "409", description = "Violação de restrição de dados",
-                    content = {@Content(
-                            mediaType = "application/json",
-                            schema = @Schema(example = "Conflict")
-                    )})
-    })
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @Valid @RequestBody FotoDto fotoDto){
-        try {
-            FotoModel updateFoto = fotoService.putFoto(fotoDto, id);
-            return  ResponseEntity.ok(updateFoto);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        } catch (DataIntegrityViolationException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar a foto: " + e.getRootCause().getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
-        } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar a foto: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-
-
     @Operation(summary = "Atualiza parcialmente uma foto", description = "Atualiza parcialmente uma foto existente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Foto atualizada com sucesso",
