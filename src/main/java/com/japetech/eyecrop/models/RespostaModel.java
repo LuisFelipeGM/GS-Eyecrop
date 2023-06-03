@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "T_ECP_FOTO")
-public class FotoModel implements Serializable {
+@Table(name = "T_ECP_RESPOSTA")
+public class RespostaModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,14 +18,11 @@ public class FotoModel implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 255)
-    private String foto;
+    private String resposta;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_FOTO_USUARIO"))
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_foto", foreignKey = @ForeignKey(name = "FK_RESPOSTA_FOTO"))
     @JsonIgnore
-    private UsuarioModel usuario;
-
-    @OneToOne(mappedBy = "foto")
-    private RespostaModel resposta;
+    private FotoModel foto;
 
 }
