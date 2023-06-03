@@ -1,9 +1,9 @@
 package com.japetech.eyecrop.controller;
 
-import com.japetech.eyecrop.dtos.FotoDto;
+import com.japetech.eyecrop.dtos.RespostaDto;
 import com.japetech.eyecrop.exceptions.ErrorResponse;
-import com.japetech.eyecrop.models.FotoModel;
-import com.japetech.eyecrop.services.FotoService;
+import com.japetech.eyecrop.models.RespostaModel;
+import com.japetech.eyecrop.services.RespostaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,26 +20,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@Tag(name = "Foto", description = "API para o gerenciamento de fotos no sistema")
+@Tag(name = "Respostas", description = "API para o gerenciamento de respostas no sistema")
 @RestController
-@RequestMapping("/fotos")
+@RequestMapping("/respostas")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class FotoController {
+public class RespostaController {
 
-    final FotoService fotoService;
+    final RespostaService respostaService;
 
-    public FotoController(FotoService fotoService) {
-        this.fotoService = fotoService;
+    public RespostaController(RespostaService respostaService) {
+        this.respostaService = respostaService;
     }
 
-    @Operation(summary = "Lista todos as fotos", description = "Lista todos as fotos no sistema")
+    @Operation(summary = "Lista todos as respostas", description = "Lista todos as respostas no sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Fotos encontradas com sucesso",
+            @ApiResponse(responseCode = "200", description = "Respostas encontradas com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = FotoModel.class))
+                            array = @ArraySchema(schema = @Schema(implementation = RespostaModel.class))
                     )}),
-            @ApiResponse(responseCode = "204", description = "Nenhuma Foto encontrada",
+            @ApiResponse(responseCode = "204", description = "Nenhuma Resposta encontrada",
                     content = {@Content(
                             mediaType = "application/json",
                             schema = @Schema(example = "No content")
@@ -47,43 +47,44 @@ public class FotoController {
     })
     @GetMapping("/")
     public ResponseEntity<Object> get(){
-        List<FotoModel> fotos = fotoService.getAll();
-        if (fotos.isEmpty()){
+        List<RespostaModel> respostas = respostaService.getAll();
+        if (respostas.isEmpty()){
             return ResponseEntity.noContent().build();
         }else{
-            return ResponseEntity.status(HttpStatus.OK).body(fotos);
+            return ResponseEntity.status(HttpStatus.OK).body(respostas);
         }
     }
 
-    @Operation(summary = "Recupera uma foto por ID", description = "Recupera os dados de uma foto a partir do seu ID")
+    @Operation(summary = "Recupera uma resposta por ID", description = "Recupera os dados de uma resposta a partir do seu ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Foto encontrada com sucesso",
+            @ApiResponse(responseCode = "200", description = "Resposta encontrada com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = FotoModel.class))
+                            array = @ArraySchema(schema = @Schema(implementation = RespostaModel.class))
                     )}),
-            @ApiResponse(responseCode = "404", description = "Foto não encontrado",
+            @ApiResponse(responseCode = "404", description = "Resposta não encontrado",
                     content = {@Content(
                             mediaType = "application/json",
                             schema = @Schema(example = "No content")
                     )})
     })
     @GetMapping("/{id}")
-    public ResponseEntity<FotoModel> getByid(@PathVariable Long id) {
+    public ResponseEntity<RespostaModel> getByid(@PathVariable Long id){
         try {
-            FotoModel foto = fotoService.findById(id);
-            return ResponseEntity.ok(foto);
+            RespostaModel res = respostaService.findById(id);
+            return ResponseEntity.ok(res);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @Operation(summary = "Salva uma foto", description = "Salva uma foto")
+
+    @Operation(summary = "Salva uma resposta", description = "Salva uma resposta")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "foto salva com sucesso",
+            @ApiResponse(responseCode = "201", description = "Resposta salva com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = FotoModel.class)
+                            schema = @Schema(implementation = RespostaModel.class)
                     )}),
             @ApiResponse(responseCode = "409", description = "Violação de restrição de dados",
                     content = {@Content(
@@ -92,26 +93,26 @@ public class FotoController {
                     )})
     })
     @PostMapping("/")
-    public ResponseEntity<Object> save(@Valid @RequestBody FotoDto fotoDto){
+    public ResponseEntity<Object> save(@Valid @RequestBody RespostaDto respostaDto){
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(fotoService.adicionarFoto(fotoDto));
+            return ResponseEntity.status(HttpStatus.CREATED).body(respostaService.adicionarResposta(respostaDto));
         } catch (DataIntegrityViolationException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar a foto: " + e.getRootCause().getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar a resposta: " + e.getRootCause().getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar a foto: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao salvar a resposta: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
-    @Operation(summary = "Exclui uma foto pelo ID", description = "Exclui uma foto a partir do seu ID")
+    @Operation(summary = "Exclui uma resposta pelo ID", description = "Exclui uma resposta a partir do seu ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Foto excluida com sucesso",
+            @ApiResponse(responseCode = "204", description = "Resposta excluida com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = FotoModel.class)
+                            schema = @Schema(implementation = RespostaModel.class)
                     )}),
-            @ApiResponse(responseCode = "404", description = "Foto não encontrada",
+            @ApiResponse(responseCode = "404", description = "Resposta não encontrada",
                     content = {@Content(
                             mediaType = "application/json",
                             schema = @Schema(example = "No content")
@@ -120,7 +121,7 @@ public class FotoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){
         try {
-            fotoService.deleteById(id);
+            respostaService.deleteById(id);
             return ResponseEntity.noContent().build();
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
@@ -130,14 +131,14 @@ public class FotoController {
         }
     }
 
-    @Operation(summary = "Atualiza parcialmente uma foto", description = "Atualiza parcialmente uma foto existente")
+    @Operation(summary = "Atualiza parcialmente uma resposta", description = "Atualiza parcialmente uma resposta existente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Foto atualizada com sucesso",
+            @ApiResponse(responseCode = "200", description = "Resposta atualizada com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = FotoModel.class)
+                            schema = @Schema(implementation = RespostaModel.class)
                     )}),
-            @ApiResponse(responseCode = "404", description = "Foto não encontrado",
+            @ApiResponse(responseCode = "404", description = "Resposta não encontrado",
                     content = {@Content(
                             mediaType = "application/json",
                             schema = @Schema(example = "No content")
@@ -149,17 +150,17 @@ public class FotoController {
                     )})
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @RequestBody FotoDto fotoDto){
+    public ResponseEntity<Object> partialUpdate(@PathVariable Long id, @RequestBody RespostaDto respostaDto){
         try {
-            FotoModel updateFoto = fotoService.patchFoto(fotoDto, id);
-            return ResponseEntity.ok(updateFoto);
+            RespostaModel updateResposta = respostaService.patchResposta(respostaDto, id);
+            return ResponseEntity.ok(updateResposta);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a foto: " + e.getRootCause().getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a resposta: " + e.getRootCause().getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a foto: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a resposta: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
