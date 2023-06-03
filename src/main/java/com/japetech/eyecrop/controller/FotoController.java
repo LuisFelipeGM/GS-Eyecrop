@@ -32,7 +32,7 @@ public class FotoController {
         this.fotoService = fotoService;
     }
 
-    @Operation(summary = "Lista todos as fotos", description = "Lista todos os usuarios as fotos")
+    @Operation(summary = "Lista todos as fotos", description = "Lista todos as fotos no sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fotos encontradas com sucesso",
                     content = {@Content(
@@ -156,10 +156,10 @@ public class FotoController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         } catch (DataIntegrityViolationException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente o usuário: " + e.getRootCause().getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a foto: " + e.getRootCause().getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente o usuário: " + e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Erro ao atualizar parcialmente a foto: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
