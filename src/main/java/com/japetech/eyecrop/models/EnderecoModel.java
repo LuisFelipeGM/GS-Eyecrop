@@ -31,7 +31,7 @@ public class EnderecoModel implements Serializable {
     private String estado;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_ENDERECO_USUARIO"))
     @JsonIgnore
     private UsuarioModel usuario;
