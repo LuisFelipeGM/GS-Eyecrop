@@ -151,6 +151,9 @@ public class UsuarioController {
             return ResponseEntity.noContent().build();
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
+        } catch (DataIntegrityViolationException e) {
+            ErrorResponse errorResponse = new ErrorResponse("Violação de restrição de integridade: " + e.getRootCause().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         }
     }
 
