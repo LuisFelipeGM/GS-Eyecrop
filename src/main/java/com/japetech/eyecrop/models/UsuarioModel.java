@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,5 +32,8 @@ public class UsuarioModel implements Serializable {
 
     @OneToOne(mappedBy = "usuario")
     private EnderecoModel endereco;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<FotoModel> foto = new ArrayList<>();
 
 }
