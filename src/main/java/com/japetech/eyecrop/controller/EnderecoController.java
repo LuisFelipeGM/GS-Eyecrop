@@ -216,7 +216,7 @@ public class EnderecoController {
             @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso",
                     content = {@Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioModel.class)
+                            schema = @Schema(implementation = EnderecoModel.class)
                     )}),
             @ApiResponse(responseCode = "404", description = "Endereço não encontrado",
                     content = {@Content(
