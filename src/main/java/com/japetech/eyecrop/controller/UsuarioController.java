@@ -94,12 +94,12 @@ public class UsuarioController {
                     )})
     })
     @GetMapping("/email/{email}")
-    public ResponseEntity<List<UsuarioModel>> getByEmail(@PathVariable String email) {
-        List<UsuarioModel> usuarios = usuarioService.findByemail(email);
-        if (usuarios.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
+    public ResponseEntity<UsuarioModel> getByEmail(@PathVariable String email) {
+        try {
+            UsuarioModel usuarios = usuarioService.findByemail(email);
             return ResponseEntity.ok(usuarios);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 

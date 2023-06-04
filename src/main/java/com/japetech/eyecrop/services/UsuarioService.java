@@ -21,7 +21,7 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<UsuarioModel> findByemail(String email){
+    public UsuarioModel findByemail(String email){
         return ((UsuarioRepository) repository).findByemail(email);
     }
 
