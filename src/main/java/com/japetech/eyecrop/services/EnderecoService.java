@@ -6,6 +6,8 @@ import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.repositories.EnderecoRepository;
 import com.japetech.eyecrop.repositories.UsuarioRepository;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,10 @@ public class EnderecoService extends GenericService<EnderecoModel, Long>{
         super(repository);
         this.enderecoRepository = enderecoRepository;
         this.usuarioRepository = usuarioRepository;
+    }
+
+    public Page<EnderecoModel> getAll(Pageable paginacao) {
+        return repository.findAll(paginacao);
     }
 
     public List<EnderecoModel> findByestado(String estado){

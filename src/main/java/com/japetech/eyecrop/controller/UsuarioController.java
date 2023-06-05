@@ -13,6 +13,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,13 +50,26 @@ public class UsuarioController {
                     )})
     })
     @GetMapping("/")
-    public ResponseEntity<Object> get() {
-        List<UsuarioModel> usuarios = usuarioService.getAll();
+    public ResponseEntity<Object> get(@PageableDefault(size = 10) Pageable paginacao) {
+        Page<UsuarioModel> usuarios =  usuarioService.getAll(paginacao);
         if (usuarios.isEmpty()){
             return ResponseEntity.noContent().build();
         }else{
             return ResponseEntity.status(HttpStatus.OK).body(usuarios);
         }
+    }
+
+    @Operation(summary = "Recupera um usuario pelo nome ou email", description = "Recupera os dados de um usuario a partir do seu Nome ou Email")
+    @ApiResponse(responseCode = "200", description = "Usuarios encontrados com sucesso",
+            content = {@Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = UsuarioModel.class))
+            )})
+    @GetMapping("/search")
+    public Page<UsuarioModel> search(@RequestParam("searchTerm") String searchTerm,
+                                     @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                     @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        return usuarioService.search(searchTerm, page, size);
     }
 
 
@@ -79,30 +95,6 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @Operation(summary = "Recupera um usuario pelo email", description = "Recupera os dados de um usuario a partir do seu email")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario encontrado com sucesso",
-                    content = {@Content(
-                            mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UsuarioModel.class))
-                    )}),
-            @ApiResponse(responseCode = "404", description = "Usuario não encontrado",
-                    content = {@Content(
-                            mediaType = "application/json",
-                            schema = @Schema(example = "No content")
-                    )})
-    })
-    @GetMapping("/email/{email}")
-    public ResponseEntity<UsuarioModel> getByEmail(@PathVariable String email) {
-        try {
-            UsuarioModel usuarios = usuarioService.findByemail(email);
-            return ResponseEntity.ok(usuarios);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
 
     @Operation(summary = "Salva um usuario", description = "Salva um usuario")
     @ApiResponses(value = {
