@@ -40,6 +40,8 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
         try {
             UsuarioModel model = new UsuarioModel();
             model.setNome(usuarioDto.getNome());
+            model.setEmail(usuarioDto.getEmail());
+            model.setSenha(usuarioDto.getSenha());
 
             return repository.save(model);
         } catch (DataAccessException e) {
@@ -56,6 +58,8 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
             if(usuarioOptional.isPresent()){
                 UsuarioModel usu = usuarioOptional.get();
                 usu.setNome(usuarioDto.getNome());
+                usu.setEmail(usuarioDto.getEmail());
+                usu.setSenha(usuarioDto.getSenha());
 
                 UsuarioModel updateUsuario = repository.save(usu);
                 return updateUsuario;
@@ -78,6 +82,12 @@ public class UsuarioService extends GenericService<UsuarioModel, Long>{
                 UsuarioModel usu = usuarioOptional.get();
                 if(usuarioDto.getNome() != null){
                     usu.setNome(usuarioDto.getNome());
+                }
+                if(usuarioDto.getEmail() != null){
+                    usu.setEmail(usuarioDto.getEmail());
+                }
+                if(usuarioDto.getSenha() != null){
+                    usu.setSenha(usuarioDto.getSenha());
                 }
                 UsuarioModel updatedUsuario = repository.save(usu);
                 return updatedUsuario;
