@@ -5,6 +5,9 @@ import com.japetech.eyecrop.models.EnderecoModel;
 import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.repositories.EnderecoRepository;
 import com.japetech.eyecrop.repositories.UsuarioRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,9 @@ public class EnderecoService extends GenericService<EnderecoModel, Long>{
 
     private final UsuarioRepository usuarioRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public EnderecoService(JpaRepository<EnderecoModel, Long> repository, EnderecoRepository enderecoRepository, UsuarioRepository usuarioRepository) {
         super(repository);
         this.enderecoRepository = enderecoRepository;
@@ -33,11 +39,17 @@ public class EnderecoService extends GenericService<EnderecoModel, Long>{
     }
 
     public List<EnderecoModel> findByestado(String estado){
-        return ((EnderecoRepository) repository).findByestadoContainingIgnoreCase(estado);
+        Query query = entityManager.createQuery("SELECT e FROM EnderecoModel e WHERE LOWER(e.estado) = :estado");
+        query.setParameter("estado", estado.toLowerCase());
+
+        return query.getResultList();
     }
 
     public List<EnderecoModel> findBycidade(String cidade){
-        return ((EnderecoRepository) repository).findBycidadeContainingIgnoreCase(cidade);
+        Query query = entityManager.createQuery("SELECT e FROM EnderecoModel e WHERE LOWER(e.cidade) = :cidade");
+        query.setParameter("cidade", cidade.toLowerCase());
+
+        return query.getResultList();
     }
 
     public EnderecoModel adicionarEndereco(EnderecoDto enderecoDto){
