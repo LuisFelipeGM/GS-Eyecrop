@@ -2,7 +2,7 @@ package com.japetech.eyecrop.controller;
 
 import com.japetech.eyecrop.dtos.LoginDto;
 import com.japetech.eyecrop.dtos.TokenJWT;
-import com.japetech.eyecrop.models.LoginModel;
+import com.japetech.eyecrop.models.UsuarioModel;
 import com.japetech.eyecrop.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class AuthenticationController {
         var authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.login(), loginDto.senha());
         var authentication = manager.authenticate(authenticationToken);
 
-        var tokenJWT = tokenService.gerarToken((LoginModel) authentication.getPrincipal());
+        var tokenJWT = tokenService.gerarToken((UsuarioModel) authentication.getPrincipal());
 
         return ResponseEntity.ok(new TokenJWT(tokenJWT));
 

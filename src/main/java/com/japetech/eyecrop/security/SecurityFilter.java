@@ -1,6 +1,5 @@
 package com.japetech.eyecrop.security;
 
-import com.japetech.eyecrop.repositories.LoginRepository;
 import com.japetech.eyecrop.repositories.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,14 +20,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private LoginRepository repository;
+    private UsuarioRepository repository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var tokenJWT = recuperarToken(request);
         if (tokenJWT != null){
             var subject  = tokenService.getSubject(tokenJWT);
-            var login = repository.findByLogin(subject);
+            var login = repository.findByemail(subject);
             var authentication = new UsernamePasswordAuthenticationToken(login, null, login.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
