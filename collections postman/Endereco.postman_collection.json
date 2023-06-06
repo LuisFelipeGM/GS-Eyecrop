@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Enderecos (delete) bug",
+			"name": "Enderecos (delete)",
 			"request": {
 				"method": "DELETE",
 				"header": [],
