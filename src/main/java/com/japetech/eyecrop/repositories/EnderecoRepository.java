@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface EnderecoRepository extends JpaRepository<EnderecoModel, Long> {
 
-    List<EnderecoModel> findByestadoContainingIgnoreCase(String estado);
+    List<EnderecoModel> findByestado(String estado);
 
-    List<EnderecoModel> findBycidadeContainingIgnoreCase(String cidade);
+    List<EnderecoModel> findBycidade(String cidade);
 
 }
