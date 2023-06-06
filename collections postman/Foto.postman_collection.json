@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "6f45dc6b-038d-43c5-a0c4-f6c48f9f7dd3",
+		"name": "Foto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23735733"
+	},
+	"item": [
+		{
+			"name": "Fotos (delete)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fotos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fotos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fotos (all)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fotos/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fotos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fotos (byId)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fotos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fotos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fotos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foto\" : \"https://forbes.com.br/wp-content/uploads/2023/05/carreira-bill-gates-microsoft-conselhos-getty-768x512.jpg\",\r\n    \"idUsuario\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/fotos/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fotos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fotos (partial)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foto\" : \"https://forbes.com.br/wp-content/uploads/2023/05/carreira-bill-gates-microsoft-conselhos-getty-768x512.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/fotos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fotos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "b72acd81-8b57-4707-b933-b8e5dffba467",
+		"name": "Endereco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23735733"
+	},
+	"item": [
+		{
+			"name": "Enderecos (delete)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/enderecos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (all)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWlzQGdtYWlsLmNvbSIsImlzcyI6IkV5ZUNyb3AiLCJleHAiOjE2ODU5NTA3Njd9.GPmlNzmYbygeINGe5oe5bS2sYs4RqcC9Up-dkdjnf_4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/enderecos/?size=10&page=0&sort=logradouro",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "sort",
+							"value": "logradouro"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (byId)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/enderecos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (byCidade)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWlzQGdtYWlsLmNvbSIsImlzcyI6IkV5ZUNyb3AiLCJleHAiOjE2ODYwMTk2MTF9.LxmQ3DkWN3XLREFnincBasFFcoZy8nfbMSZ8m0UeiTU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/enderecos/cidade/carapicuiba",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"cidade",
+						"carapicuiba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (byEstado)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWlzQGdtYWlsLmNvbSIsImlzcyI6IkV5ZUNyb3AiLCJleHAiOjE2ODYwMTk2MTF9.LxmQ3DkWN3XLREFnincBasFFcoZy8nfbMSZ8m0UeiTU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/enderecos/estado/amazonas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"estado",
+						"amazonas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWlzQGdtYWlsLmNvbSIsImlzcyI6IkV5ZUNyb3AiLCJleHAiOjE2ODYwMTk0NDR9.vGh7wipcGfrEV4Z2zMQPZjYMrxoQjYLtAai0Ti1N5jM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"logradouro\": \"Rua Itupeva\",\r\n    \"numero\": 12,\r\n    \"cidade\": \"Carapicuiba\",\r\n    \"estado\": \"Amazonas\",\r\n    \"idUsuario\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/enderecos/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (partial)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cidade\": \"Barueri\",\r\n    \"estado\": \"Mato Grosso\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/enderecos/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enderecos (full)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"logradouro\": \"Rua Itupeva\",\r\n    \"numero\": 1202,\r\n    \"cidade\": \"Carapicuiba\",\r\n    \"estado\": \"São Paulo\",\r\n    \"idUsuario\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/enderecos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enderecos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
