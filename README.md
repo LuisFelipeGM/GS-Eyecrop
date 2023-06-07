@@ -12,16 +12,10 @@ Mas, o que é esse projeto?
 
     * [Instalação](#Instalação)
     * [Execução](#Execução)
-    * [Teste dos recursos](#Teste-dos-recursos)
-
-
-        <details>
-        <summary><a href="#Endpoints">Endpoints</a></summary>
-
-        * [Usuário](#Usuario)
-
-        </details>
-    
+    * [Teste dos recursos](#Teste-dos-recursos) 
+    * [Collections endpoints](#Collections-endpoints)
+    * [Lista de endpoints utilizados](#Lista-de-endpoints-utilizados)
+    * [Tecnologias](#Tecnologias)
     * [Últimas atualizações](#Últimas-atualizações)
 
     <details>
@@ -37,7 +31,7 @@ Mas, o que é esse projeto?
 
 ## Descrição do projeto
 
-*Vídeo Pitch*
+[![Nossa Proposta para a GS](./images/thumbnail_pitch.png)](https://youtu.be/vr3RtNTjP8M)
 
 O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento está próprio para o consumo ou não, através de uma foto do alimento, diminuindo, assim, o desperdício de alimentos.  
 
@@ -45,7 +39,7 @@ O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento e
 
 # Mais informações sobre este projeto
 
-*Vídeo Explicativa (5-10 min)*
+[![Vídeo Explicativo Técnico](./images/thumbnail_yt.png)](https://youtu.be/vr3RtNTjP8M)
 
 ## Instalação
 
@@ -63,7 +57,12 @@ Em execução, os endpoints liberados para teste são o POST /login e POST /usua
 
 * Uso do PostMan para testes de cadastro de usuário 
 
-## <a href="#PATH#">Collections Endpoints</a>
+## Collections endpoints
+<a href="./collections-postman">Pasta com as collections</a>
+
+## Lista de endpoints utilizados
+
+![Endpoints](./images/endpoints.png)
 
 ## Tecnologias 🛠️
 * Ferramentas utilizadas para este projeto:
@@ -73,8 +72,7 @@ Em execução, os endpoints liberados para teste são o POST /login e POST /usua
 * 05/06/2023
 ---
 
-# Feito por JapeTech
-<img alt="JapeTech" title="japetech" src="images\japetech.jpg" width="20vw" height="20vh">
+# Feito por JapeTech <img alt="JapeTech" title="japetech" src="./images/japetech.png" width="50vw" height="50vh"> 
 
 
 ## Contatos
