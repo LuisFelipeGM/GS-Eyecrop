@@ -39,7 +39,7 @@ O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento e
 
 # Mais informações sobre este projeto
 
-[![Vídeo Explicativo Técnico](images\thumbnail_yt.png)](https://youtu.be/vr3RtNTjP8M)
+[![Vídeo Explicativo Técnico](./images/thumbnail_yt.png)](https://youtu.be/vr3RtNTjP8M)
 
 ## Instalação
 
@@ -114,7 +114,7 @@ Em execução, os endpoints liberados para teste são o POST /login e POST /usua
 * 05/06/2023
 ---
 
-# Feito por JapeTech <img alt="JapeTech" title="japetech" src="images\japetech.png" width="50vw" height="50vh"> 
+# Feito por JapeTech <img alt="JapeTech" title="japetech" src="./images/japetech.png" width="50vw" height="50vh"> 
 
 
 ## Contatos
