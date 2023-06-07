@@ -141,36 +141,6 @@
 			"response": []
 		},
 		{
-			"name": "Usuarios (byEmail)",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsdWlzQGdtYWlsLmNvbSIsImlzcyI6IkV5ZUNyb3AiLCJleHAiOjE2ODYwMDQ4MTl9.a8AVfjYFWq8Wi3YjV_TtJrREqeJ6Fib1T4F73R-SRMs",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/usuarios/email/luis%40gmail.com",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"email",
-						"luis%40gmail.com"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Usuarios",
 			"request": {
 				"auth": {
