@@ -51,7 +51,7 @@ O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento e
 
 ## Execução
 
-Em execução, os endpoints liberados para teste são o POST /login e POST /usuario, se não tiver uma conta cadastrada na aplicação se cadastre a partir do /usuario. Após isso realize o Login com o /login, pegue o Token que vira na resposta e adicione ao cabeçalho de cada requisição que tentar executar.
+Em execução, os endpoints liberados para teste são o POST /login e POST /usuario, se não tiver uma conta cadastrada na aplicação se cadastre a partir do /usuario. Após isso realize o Login com o /login, pegue o Token que vira na resposta e adicione ao cabeçalho de cada requisição indo em Autorização e selecionando o tipo Bearer Token,  ao  que tentar executar.
 
 ## Teste dos recursos
 
