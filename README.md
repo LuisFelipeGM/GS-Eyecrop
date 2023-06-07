@@ -31,7 +31,7 @@ Mas, o que é esse projeto?
 
 ## Descrição do projeto
 
-[![Nossa Proposta para a GS](images\thumbnail_pitch.png)](https://youtu.be/vr3RtNTjP8M "Nossa Proposta para a GS")
+[![Nossa Proposta para a GS](images\thumbnail_pitch.png)](https://youtu.be/vr3RtNTjP8M)
 
 O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento está próprio para o consumo ou não, através de uma foto do alimento, diminuindo, assim, o desperdício de alimentos.  
 
@@ -39,7 +39,7 @@ O EyeCrop é um aplicativo mobile que tem como objetivo avaliar se um alimento e
 
 # Mais informações sobre este projeto
 
-[![Vídeo Explicativo Técnico](images\thumbnail_yt.png)](https://youtu.be/vr3RtNTjP8M "Vídeo Explicativo Técnico")
+[![Vídeo Explicativo Técnico](images\thumbnail_yt.png)](https://youtu.be/vr3RtNTjP8M)
 
 ## Instalação
 
