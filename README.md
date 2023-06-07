@@ -62,49 +62,7 @@ Em execução, os endpoints liberados para teste são o POST /login e POST /usua
 
 ## Lista de endpoints utilizados
 
-### Fotos
-| Função 	                               | Endpoint     				                | Verbo  | Retorno				                                                                  |
-|:----------------------------------------:|:------------------------------------------:|:------:|:--------------------------------------------------------------------------------------:|
-| Lista todas as fotos                     | /fotos/                                    | GET    | 200 - Sucesso 204 - Nenhuma foto encontrada                                            |
-| Busca foto por ID                        | /fotos/{id}                                | GET    | 200 - Sucesso 404 - Foto não encontrada                                                |
-| Salva uma Foto                           | /fotos/                                    | POST   | 201 - Foto salva 409 - Violação de Restrição de dados                                  |
-| Atualiza parcialmente uma foto           | /fotos/{id}                                | PATCH  | 200 - Foto atualizada 404 - Foto não encontrada Violação de Restrição de dados         |
-
-### Respostas
-| Função 	                               | Endpoint     				                | Verbo  | Retorno								                                                  |
-|:----------------------------------------:|:------------------------------------------:|:------:|:--------------------------------------------------------------------------------------:|
-| Exclui uma foto pelo ID                  | /fotos/{id}                                | DELETE | 204 - Foto excluída 404 - Foto não encontrada                                          |
-| Lista todas as respostas                 | /respostas/                                | GET    | 200 - Sucesso 204 - Nenhuma resposta encontrada                                        |
-| Busca resposta por ID                    | /respostas/{id}                            | GET    | 200 - Sucesso 404 - Resposta não encontrada                                            |
-| Salva uma Resposta                       | /respostas/                                | POST   | 201 - Resposta salva 409 - Violação de Restrição de dados                              |
-| Atualiza parcialmente uma Resposta       | /respostas/{id}                            | PATCH  | 200 - Resposta atualizada 404 - Resposta não encontrada Violação de Restrição de dados |
-| Exclui uma resposta pelo ID              | /respostas/{id}                            | DELETE | 204 - Resposta excluída 404 - Resposta não encontrada                                  |
-
-### Usuários
-| Função 	                               | Endpoint     				                | Verbo  | Retorno								                                                  |
-|:----------------------------------------:|:------------------------------------------:|:------:|:--------------------------------------------------------------------------------------:|
-| Lista todos os usuários                  | /usuarios/                                 | GET    | 200 - Sucesso 204 - Nenhum usuário encontrada                                          |
-| Busca usuário por ID                     | /usuarios/{id}                             | GET    | 200 - Sucesso 404 - usuário não encontrada                                             |
-| Salva uma usuário                        | /usuarios/                                 | POST   | 201 - usuário salva 409 - Violação de Restrição de dados                               |
-| Atualiza  um usuário existente           | /usuarios/{id}                             | PUT    | 200 - usuário atualizada 404 - usuário não encontrada Violação de Restrição de dados   |
-| Atualiza parcialmente um usuário         | /usuarios/{id}                             | PATCH  | 200 - usuário atualizada 404 - usuário não encontrada Violação de Restrição de dados   |
-| Exclui uma usuário pelo ID               | /usuarios/{id}				                | DELETE | 204 - usuário excluída 404 - Resposta não encontrada      			                  |
-
-### Endereços
-| Função 	                               | Endpoint     				                | Verbo  | Retorno								                                                  |
-|:----------------------------------------:|:------------------------------------------:|:------:|:--------------------------------------------------------------------------------------:|
-| Lista todos os endereços                 | /enderecos/?size=10&page=0&sort=logradouro | GET    | 200 - Sucesso 400 - Nenhum Endereço encontrado					                      |
-| Recupera um endereço por ID              | /enderecos/{id}               		        | GET    | 200 - Sucesso 404 - Endereço não encontrado					                          |
-| Recupera um endereço pelo estado         | /enderecos/estado/{estado}		  	        | GET    | 200 - Sucesso 404 - Endereço não encontrado					                          |
-| Recupera um endereço pela cidade         | /enderecos/cidade/{cidade}		        	| GET    | 200 - Sucesso 404 - Endereço não encontrado					                          |
-| Salva o endereço	                       | /enderecos/				                | POST   | 201 - Sucesso 409 - Violação de restrição de dados				                      |
-| Exclui um endereço por ID                | /enderecos/{id}				            | DELETE | 204 - Sucesso 404 - Endereço não encontrado					                          |
-| Atualiza parcialmente um endereço por ID | /enderecos/{id}				            | PATCH  | 200 - Sucesso 404 - Endereço não encontrado 409 - Violação de restrição de dados       |
-| Atualiza totalment um endereço por ID    | /enderecos/{id}				            | PATCH  | 200 - Sucesso 404 - Endereço não encontrado 409 - Violação de restrição de dados       |
-
-
-
-
+![Endpoints](./images/endpoints.png)
 
 ## Tecnologias 🛠️
 * Ferramentas utilizadas para este projeto:
